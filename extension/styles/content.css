@@ -1,0 +1,169 @@
+/* PhishCatch Gmail Banner Styles */
+
+.phishcatch-banner {
+  position: relative;
+  z-index: 9999;
+  margin: 0 16px 8px 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-family: 'Google Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  animation: phishcatch-slideDown 0.3s ease-out;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.phishcatch-banner:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes phishcatch-slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Status Colors */
+.phishcatch-safe {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #6ee7b7;
+  color: #065f46;
+}
+
+.phishcatch-suspicious {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+
+.phishcatch-dangerous {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.phishcatch-scanning {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #93c5fd;
+  color: #1e40af;
+}
+
+.phishcatch-error {
+  background: linear-gradient(135deg, #fefce8, #fef9c3);
+  border: 1px solid #fde047;
+  color: #854d0e;
+}
+
+/* Layout */
+.phishcatch-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phishcatch-banner-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phishcatch-banner-text {
+  line-height: 1.4;
+}
+
+.phishcatch-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Score Ring */
+.phishcatch-score-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(var(--score-color) var(--score-pct), #e5e7eb var(--score-pct));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.phishcatch-score-ring::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: white;
+}
+
+.phishcatch-score-num {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--score-color);
+}
+
+/* Indicators */
+.phishcatch-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.phishcatch-indicator {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+.phishcatch-sev-high {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+.phishcatch-sev-medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.phishcatch-sev-low {
+  background: rgba(107, 114, 128, 0.12);
+  color: #6b7280;
+}
+
+/* Spinner */
+.phishcatch-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #93c5fd;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: phishcatch-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes phishcatch-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dismiss Button */
+.phishcatch-dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.phishcatch-dismiss:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.06);
+}

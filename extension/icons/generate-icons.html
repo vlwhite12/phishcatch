@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishCatch Icon Generator (Helper Tool)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+    h1 { color: #a5b4fc; margin-bottom: 4px; }
+    .note {
+      background: #1e1b4b;
+      border: 1px solid #4338ca;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 28px;
+      font-size: 0.875rem;
+      color: #c7d2fe;
+    }
+    .note strong { color: #818cf8; }
+    .icon-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    canvas {
+      border-radius: 6px;
+      box-shadow: 0 0 0 1px #4338ca, 0 4px 16px rgba(99,102,241,0.3);
+      image-rendering: pixelated;
+    }
+    .label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+    button {
+      background: linear-gradient(135deg, #6366f1, #7c3aed);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    button:hover { opacity: 0.85; }
+    .all-btn {
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      padding: 10px 24px;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+    hr { border-color: #2d2b55; margin: 24px 0; }
+    h2 { color: #818cf8; font-size: 1rem; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+<h1>PhishCatch Icon Generator</h1>
+
+<div class="note">
+  <strong>Helper Tool Note:</strong> This HTML page is a convenience utility for visualising
+  the SVG icons and downloading them as PNG files. It is <em>not</em> part of the extension
+  itself. For automated PNG generation, use <code>node generate-icons.js</code> from the
+  repo root instead.
+</div>
+
+<h2>SVG Icons (rendered via &lt;canvas&gt;)</h2>
+<div class="icon-row" id="icon-row"></div>
+
+<button class="all-btn" onclick="downloadAll()">Download All PNGs</button>
+
+<hr>
+<p style="font-size:0.8rem;color:#64748b;">
+  Icons are rendered from the SVG source files in this directory.
+  Open this file from the repo folder so relative URLs resolve correctly.
+</p>
+
+<script>
+  const ICONS = [
+    { size: 16,  file: 'icon16.svg'  },
+    { size: 48,  file: 'icon48.svg'  },
+    { size: 128, file: 'icon128.svg' },
+  ];
+
+  const row = document.getElementById('icon-row');
+
+  ICONS.forEach(({ size, file }) => {
+    const card = document.createElement('div');
+    card.className = 'icon-card';
+
+    const canvas = document.createElement('canvas');
+    canvas.width  = size;
+    canvas.height = size;
+    // Scale up small icons for visibility
+    const displaySize = Math.max(size, 64);
+    canvas.style.width  = displaySize + 'px';
+    canvas.style.height = displaySize + 'px';
+    canvas.id = 'canvas-' + size;
+
+    const img = new Image();
+    img.onload = () => {
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+    };
+    img.onerror = () => {
+      const ctx = canvas.getContext('2d');
+      // Fallback: draw a solid purple square
+      const grd = ctx.createLinearGradient(0, 0, size, size);
+      grd.addColorStop(0, '#6366f1');
+      grd.addColorStop(1, '#7c3aed');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      const r = size * 0.12;
+      ctx.roundRect(0, 0, size, size, r);
+      ctx.fill();
+    };
+    img.src = file;
+
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = `${size}×${size}`;
+
+    const btn = document.createElement('button');
+    btn.textContent = `Download icon${size}.png`;
+    btn.onclick = () => downloadPNG(canvas, size);
+
+    card.append(canvas, label, btn);
+    row.appendChild(card);
+  });
+
+  function downloadPNG(canvas, size) {
+    const link = document.createElement('a');
+    link.download = `icon${size}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function downloadAll() {
+    ICONS.forEach(({ size }) => {
+      const canvas = document.getElementById('canvas-' + size);
+      if (canvas) {
+        setTimeout(() => downloadPNG(canvas, size), 100 * (size === 16 ? 0 : size === 48 ? 1 : 2));
+      }
+    });
+  }
+</script>
+</body>
+</html>

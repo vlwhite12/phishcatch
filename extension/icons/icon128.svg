@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="shieldGrad128" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shieldHighlight128" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#a5b4fc;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0" />
+    </linearGradient>
+    <filter id="shadow128">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#4c1d95" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Shield outer shape -->
+  <path d="M64 4 L114 22 L114 64 C114 93 92 115 64 122 C36 115 14 93 14 64 L14 22 Z"
+        fill="url(#shieldGrad128)" filter="url(#shadow128)"/>
+  <!-- Shield inner highlight -->
+  <path d="M64 12 L106 27 L106 64 C106 89 86 109 64 116 C42 109 22 89 22 64 L22 27 Z"
+        fill="url(#shieldHighlight128)"/>
+  <!-- Shield border/rim -->
+  <path d="M64 4 L114 22 L114 64 C114 93 92 115 64 122 C36 115 14 93 14 64 L14 22 Z"
+        fill="none" stroke="#a5b4fc" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Fish hook (J shape) -->
+  <path d="M80 22 L80 74 Q80 97 64 97 Q48 97 48 78 Q48 62 61 62"
+        fill="none" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Hook barb -->
+  <path d="M61 62 L76 53" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <!-- Eye of hook (small circle at top) -->
+  <circle cx="80" cy="22" r="5.5" fill="none" stroke="white" stroke-width="5"/>
+
+  <!-- Cross-out line (bold diagonal red) -->
+  <line x1="22" y1="22" x2="106" y2="106" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
+  <!-- Drop shadow for cross line -->
+  <line x1="22" y1="22" x2="106" y2="106" stroke="#b91c1c" stroke-width="10" stroke-linecap="round" opacity="0.3" transform="translate(2,2)"/>
+</svg>
