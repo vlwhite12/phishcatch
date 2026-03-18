@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsBtn = document.getElementById("settingsBtn");
   const settingsPanel = document.getElementById("settingsPanel");
   const closeSettings = document.getElementById("closeSettings");
-  const saveSettings = document.getElementById("saveSettings");
   const clearHistory = document.getElementById("clearHistory");
-  const apiUrlInput = document.getElementById("apiUrl");
 
   // Load stats and history
   loadDashboard();
@@ -62,20 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Settings
   settingsBtn.addEventListener("click", () => {
     settingsPanel.classList.add("open");
-    chrome.storage.sync.get(["phishcatch_api_url"], (result) => {
-      apiUrlInput.value = result.phishcatch_api_url || "";
-    });
   });
 
   closeSettings.addEventListener("click", () => settingsPanel.classList.remove("open"));
-
-  saveSettings.addEventListener("click", () => {
-    const url = apiUrlInput.value.trim();
-    if (url) {
-      chrome.runtime.sendMessage({ type: "SET_API_URL", url });
-    }
-    settingsPanel.classList.remove("open");
-  });
 
   clearHistory.addEventListener("click", () => {
     chrome.storage.local.set({ scanHistory: [] }, () => {
