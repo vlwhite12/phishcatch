@@ -1,5 +1,5 @@
 const API_URL_KEY = "phishcatch_api_url";
-const DEFAULT_API_URL = "https://phishcatch-api.vercel.app";
+const DEFAULT_API_URL = "https://phishcatch-ginz.vercel.app";
 
 // Listen for messages from content script and popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
