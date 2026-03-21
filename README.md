@@ -35,7 +35,7 @@ Results appear instantly as a color-coded banner inside Gmail, and a popup dashb
 - **Dashboard** — Extension popup with aggregate stats, scan history, and click-to-expand detail views
 - **Indicator Breakdown** — Each scan lists specific phishing signals found, their severity, and actionable recommendations
 - **Scan History** — Last 50 scans stored locally with subject, sender, score, and timestamp
-- **Configurable Backend** — Settings panel to point to your own API deployment
+
 
 ## Tech Stack
 
